@@ -1,17 +1,285 @@
 ---
-
+// Portafolio de Juan Arcila - Barra de progreso vertical a la derecha
 ---
 
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Juan Arcila / Florista & Aprendiz</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		
+		<!-- BARRA DE PROGRESO VERTICAL A LA DERECHA -->
+		<div class="scroll-progress-container-vertical">
+			<div class="scroll-progress-bar-vertical" id="progressBar"></div>
+		</div>
+
+		<!-- BARRA DE NAVEGACIÓN FIJA (STICKY HEADER) -->
+		<header class="sticky-header">
+			<div class="logo">
+				<a href="#home" class="logo-link">
+					<img src="/img/logo2.png" alt="Juan Arcila Logo" class="site-logo" />
+				</a>
+			</div>
+			
+			<div class="menu-container">
+				<a href="#sobre-mi">Sobre mí</a>
+				<a href="#trabajos">Trabajos</a>
+				<a href="mailto:floritstudio@outlook.com" class="email">floritstudio@outlook.com</a>
+			</div>
+
+			<div class="social">
+				<a href="https://instagram.com" target="_blank">Instagram</a>
+			</div>
+		</header>
+
+
+		<!-- SECCIÓN 1: HOME -->
+		<section id="home" class="section home-section">
+			<!-- TEXTO VERTICAL IZQUIERDA -->
+			<aside class="vertical-text">
+				<span>floritstudio / Barcelona, España</span>
+				<span class="sub-vertical">Floral Design & Studio</span>
+			</aside>
+
+			<!-- CONTENIDO CENTRAL DEL HOME -->
+			<main class="hero">
+				<div class="hero-content">
+					<h1>JUAN ARCILA /</h1>
+					<p>FLORISTA / APRENDIZ</p>
+				</div>
+			</main>
+		</section>
+
+
+		<!-- SECCIÓN 2: SOBRE MÍ -->
+		<section id="sobre-mi" class="section about-section">
+			<div class="content-section">
+				<div class="about-grid">
+					<!-- Columna de la Imagen -->
+					<div class="image-wrapper">
+						<img src="/tu-foto.jpg" alt="Juan Arcila trabajando en diseño floral" />
+					</div>
+
+					<!-- Columna de Texto -->
+					<div class="text-wrapper">
+						<h1>Sobre mi /</h1>
+						<p>
+							Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que también ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original.
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- LÍNEA INFERIOR -->
+			<div class="footer-line"></div>
+		</section>
+
 	</body>
 </html>
+
+<script>
+	// Script dinámico para calcular el progreso del scroll de arriba a abajo
+	window.addEventListener('scroll', () => {
+		const winScroll = window.scrollY;
+		const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+		const scrolled = (winScroll / height) * 100;
+		const progressBar = document.getElementById('progressBar');
+		if (progressBar) {
+			progressBar.style.height = scrolled + '%';
+		}
+	});
+</script>
+
+<style>
+	:root {
+		--bg-color: #F3F5EE;
+		--text-color: #1A1A1A;
+	}
+
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		background-color: var(--bg-color);
+		color: var(--text-color);
+		font-family: 'Times New Roman', Times, serif, sans-serif;
+	}
+
+	/* BARRA DE PROGRESO VERTICAL A LA DERECHA */
+	.scroll-progress-container-vertical {
+		position: fixed;
+		right: 25px; /* Separación desde el borde derecho */
+		top: 50%;
+		transform: translateY(-50%);
+		width: 2px; /* Muy delgada y elegante */
+		height: 150px; /* Altura de la barra en pantalla */
+		background-color: rgba(26, 26, 26, 0.15); /* Rastro sutil de fondo */
+		z-index: 9999;
+		border-radius: 2px;
+	}
+
+	.scroll-progress-bar-vertical {
+		width: 100%;
+		height: 0%;
+		background-color: var(--text-color);
+		border-radius: 2px;
+		transition: height 0.05s ease-out;
+	}
+
+	/* CABECERA FIJA */
+	.sticky-header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 30px 50px;
+		background-color: var(--bg-color);
+		border-bottom: 1px solid var(--text-color);
+		z-index: 1000;
+	}
+
+	.logo-link {
+		display: flex;
+		align-items: center;
+		text-decoration: none;
+	}
+
+	.site-logo {
+		height: 65px;
+		width: auto;
+		display: block;
+		mix-blend-mode: multiply;
+	}
+
+	.menu-container {
+		display: flex;
+		gap: 50px;
+		position: absolute;
+		left: 180px;
+	}
+
+	.sticky-header a, .social a {
+		text-decoration: none;
+		color: var(--text-color);
+		font-size: 0.95rem;
+		letter-spacing: -0.01em;
+	}
+
+	.sticky-header a:hover, .social a:hover {
+		opacity: 0.6;
+	}
+
+	/* ESTRUCTURA DE LAS SECCIONES */
+	.section {
+		position: relative;
+		width: 100vw;
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: 0 50px;
+	}
+
+	/* TEXTO VERTICAL (SOLO HOME) */
+	.vertical-text {
+		position: absolute;
+		left: 45px;
+		top: 48%;
+		transform: translateY(-50%) rotate(-90deg);
+		transform-origin: left center;
+		display: flex;
+		gap: 25px;
+		font-size: 0.75rem;
+		letter-spacing: 0.05em;
+		white-space: nowrap;
+	}
+
+	.sub-vertical {
+		opacity: 0.7;
+	}
+
+	/* HERO CENTRAL (HOME) */
+	.hero {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+	}
+
+	.hero-content {
+		text-align: left;
+	}
+
+	.hero-content h1 {
+		font-size: 4.5rem;
+		font-weight: 400;
+		letter-spacing: -0.02em;
+        margin-bottom: 2px;
+	}
+
+	.hero-content p {
+		font-size: 0.85rem;
+		letter-spacing: 0.12em;
+		opacity: 0.85;
+	}
+
+	/* SECCIÓN SOBRE MÍ */
+	.content-section {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		padding-top: 60px;
+	}
+
+	.about-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 60px;
+		align-items: center;
+		width: 100%;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.image-wrapper img {
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+		display: block;
+		max-height: 450px;
+	}
+
+	.text-wrapper h1 {
+		font-size: 2.5rem;
+		font-weight: 400;
+		margin-bottom: 25px;
+		letter-spacing: -0.02em;
+	}
+
+	.text-wrapper p {
+		font-size: 0.95rem;
+		line-height: 1.6;
+		opacity: 0.85;
+	}
+
+	.footer-line {
+		position: absolute;
+		bottom: 30px;
+		left: 50px;
+		width: calc(100% - 100px);
+		border-bottom: 1px solid var(--text-color);
+	}
+</style>
